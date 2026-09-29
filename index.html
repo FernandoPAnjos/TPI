@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Processamento Digital de Imagens</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>PDI: Processamento Digital de Imagens</h1>
+    </header>
+
+    <main>
+
+        <section class="painel-arquivo">
+            <label for="imagemInput">Selecionar imagem:</label>""
+            <input type="file" id="imagemInput" accept="image/*">
+
+            <div class="informacoes">
+                <span id="informacaoImagem">Nenhuma imagem selecionada</span>
+            </div>
+        </section>
+
+
+        <section class="area-imagens">
+
+            <div class="imagem-box">
+                <h2>Imagem Original</h2>
+
+                <canvas id="canvasOriginal"></canvas>
+            </div>
+
+            <div class="imagem-box">
+                <h2>Imagem Resultante</h2>
+
+                <canvas id="canvasResultado"></canvas>
+                <button type="button" class="botao-download" onclick="baixarImagemResultado()">
+                    Baixar imagem resultante
+                </button>
+            </div>
+
+        </section>
+
+
+        <section class="ponta-prova">
+            <h2>Ponta de Prova</h2>
+
+            <div class="dados-pixel">
+                <span>Coordenada X: <strong id="coordenadaX">-</strong></span>
+                <span>Coordenada Y: <strong id="coordenadaY">-</strong></span>
+                <span>NC: <strong id="nivelCinza">-</strong></span>
+            </div>
+        </section>
+
+        <section class="painel-operacoes">
+
+            <section class="parametros">
+
+                <h2>Parâmetros</h2>
+
+                <div class="parametro">
+
+                    <label for="gamma">
+                        Gamma:
+                    </label>
+
+                    <input type="number" id="gamma" value="2" step="0.1" min="0.1">
+
+                    <span class="ajuda" title="Utilizado nas operações Potência e Raiz.">?</span>
+
+                </div>
+
+
+                <div class="parametro">
+
+                    <label for="valorA">
+                        Valor de A:
+                    </label>
+
+                    <input type="number" id="valorA" value="1" step="0.1">
+
+                    <span class="ajuda" title="Utilizado nas operações Expansão e Compressão.">?</span>
+
+                </div>
+
+                <div class="parametro">
+
+                    <label for="valorB">
+                        Valor de B:
+                    </label>
+
+                    <input type="number" id="valorB" value="0" step="1">
+
+                    <span class="ajuda" title="Utilizado nas operações Expansão e Compressão.">?</span>
+
+                </div>
+
+            </section>
+
+            <h2>Operações</h2>
+
+            <div class="grupo-operacoes">
+
+                <h3>Controles</h3>
+
+                <button onclick="restaurarOriginal()">
+                    Restaurar Original
+                </button>
+
+            </div>
+
+            <div class="grupo-operacoes">
+
+                <h3>Transformações</h3>
+
+                <button onclick="aplicarNegativo()">
+                    Negativo
+                </button>
+
+                <button onclick="aplicarLogaritmo()">
+                    Logaritmo
+                </button>
+
+                <button onclick="aplicarLogaritmoInverso()">
+                    Logaritmo Inverso
+                </button>
+
+                <button onclick="aplicarPotencia()">
+                    Potência
+                </button>
+
+                <button onclick="aplicarRaiz()">
+                    Raiz
+                </button>
+
+                <button onclick="aplicarExpansao()">
+                    Expansão
+                </button>
+
+                <button onclick="aplicarCompressao()">
+                    Compressão
+                </button>
+
+            </div>
+
+
+            <div class="grupo-operacoes">
+
+                <h3>Ampliação</h3>
+
+                <button onclick="aplicarNearestNeighbor(2)">
+                    Nearest Neighbor 512 × 512
+                </button>
+
+                <button onclick="aplicarNearestNeighbor(4)">
+                    Nearest Neighbor 1024 × 1024
+                </button>
+
+                <button onclick="aplicarBilinear(2)">
+                    Bilinear 512 × 512
+                </button>
+
+                <button onclick="aplicarBilinear(4)">
+                    Bilinear 1024 × 1024
+                </button>
+
+            </div>
+
+
+            <div class="grupo-operacoes">
+
+                <h3>Transformações Geométricas</h3>
+
+                <button onclick="aplicarEspelhamentoHorizontal()">
+                    Espelhamento Horizontal
+                </button>
+
+                <button onclick="aplicarEspelhamentoVertical()">
+                    Espelhamento Vertical
+                </button>
+
+                <button onclick="aplicarRotacao90Horario()">
+                    Rotação 90° Horário
+                </button>
+
+                <button onclick="aplicarRotacao90AntiHorario()">
+                    Rotação 90° Anti-Horário
+                </button>
+
+                <button onclick="aplicarRotacao180()">
+                    Rotação 180°
+                </button>
+
+            </div>
+
+
+            <div class="grupo-operacoes">
+
+                <h3>Soma de Imagens</h3>
+
+                <label for="segundaImagemInput">
+                    Segunda imagem:
+                </label>
+
+                <input type="file" id="segundaImagemInput" accept="image/*">
+
+                <label for="porcentagemImagem1">
+                    Porcentagem da primeira imagem:
+                </label>
+
+                <input type="number" id="porcentagemImagem1" value="50" min="0" max="100">
+
+                <label for="porcentagemImagem2">
+                    Porcentagem da segunda imagem:
+                </label>
+
+                <input type="number" id="porcentagemImagem2" value="50" min="0" max="100">
+
+                <button onclick="aplicarSomaImagens()">
+                    Somar Imagens
+                </button>
+
+            </div>
+
+
+            <div class="grupo-operacoes">
+
+                <h3>Filtros de Vizinhança</h3>
+
+                <label for="tamanhoMascara">
+                    Tamanho da máscara:
+                </label>
+
+                <select id="tamanhoMascara">
+                    <option value="3">3 × 3</option>
+                    <option value="5">5 × 5</option>
+                    <option value="7">7 × 7</option>
+                </select>
+
+                <button onclick="aplicarMedia()">
+                    Filtro da Média
+                </button>
+
+                <button onclick="aplicarMediana()">
+                    Filtro da Mediana
+                </button>
+
+                <button onclick="aplicarModa()">
+                    Filtro da Moda
+                </button>
+
+                <button onclick="aplicarMin()">
+                    Filtro MIN
+                </button>
+
+                <button onclick="aplicarMax()">
+                    Filtro MAX
+                </button>
+
+            </div>
+
+
+            <div class="grupo-operacoes">
+
+                <h3>Filtros de Realce</h3>
+
+                <button onclick="aplicarLaplaciano()">
+                    Laplaciano
+                </button>
+
+                <label for="fatorHighBoost">
+                    Fator A do High Boost:
+                </label>
+
+                <input type="number" id="fatorHighBoost" value="1.5" min="0" step="0.1">
+
+                <button onclick="aplicarHighBoost()">
+                    High Boost
+                </button>
+
+                <button onclick="aplicarPrewitt()">
+                    Prewitt
+                </button>
+
+                <button onclick="aplicarSobel()">
+                    Sobel
+                </button>
+
+            </div>
+
+            <div class="grupo-operacoes">
+
+                <h3>Histograma</h3>
+
+                <button onclick="mostrarHistogramaOriginal()">
+                    Histograma da Imagem
+                </button>
+
+                <button onclick="aplicarEqualizacao()">
+                    Equalização
+                </button>
+
+                <button onclick="mostrarHistogramaResultado()">
+                    Histograma da Imagem Resultante
+                </button>
+
+            </div>
+
+
+        </section>
+
+        <section class="histograma-section">
+
+            <h2>Histograma</h2>
+
+            <canvas id="canvasHistograma" width="768" height="400"></canvas>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

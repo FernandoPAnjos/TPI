@@ -1,0 +1,273 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eeeeee;
+    color: #222222;
+}
+
+header {
+    background-color: #222222;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header h1 {
+    margin: 0 0 8px 0;
+}
+
+header p {
+    margin: 0;
+}
+
+main {
+    width: 95%;
+    max-width: 1400px;
+    margin: 30px auto;
+}
+
+section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+h3 {
+    margin-top: 0;
+    width: 100%;
+}
+
+
+/* Arquivo */
+
+.painel-arquivo {
+    text-align: center;
+}
+
+.painel-arquivo label {
+    font-weight: bold;
+}
+
+#imagemInput,
+#segundaImagemInput {
+    margin-left: 10px;
+}
+
+.informacoes {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+
+/* Imagens */
+
+.area-imagens {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.imagem-box {
+    width: 48%;
+    min-width: 350px;
+    text-align: center;
+}
+
+.imagem-box h2 {
+    font-size: 20px;
+}
+
+.imagem-box canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+canvas {
+    max-width: 100%;
+    border: 1px solid #222222;
+    background-color: #dddddd;
+}
+
+#canvasOriginal,
+#canvasResultado {
+    image-rendering: auto;
+}
+
+.botao-download {
+    display: block;
+    width: fit-content;
+    margin: 12px auto 0;
+}
+
+
+/* Ponta de prova */
+
+.ponta-prova {
+    text-align: center;
+}
+
+.dados-pixel {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    font-size: 18px;
+}
+
+
+/* Operações */
+
+.painel-operacoes h2 {
+    margin-bottom: 25px;
+}
+
+.grupo-operacoes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    border-top: 1px solid #cccccc;
+    padding: 20px 0;
+}
+
+.grupo-operacoes:first-of-type {
+    border-top: none;
+}
+
+.grupo-operacoes h3 {
+    flex-basis: 100%;
+}
+
+button {
+    border: none;
+    background-color: #333333;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #555555;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+
+/* Campos */
+
+input[type="number"],
+select {
+    padding: 8px;
+    border: 1px solid #999999;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.parametros {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.parametros h2 {
+    flex-basis: 100%;
+}
+
+.parametro {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.parametro label {
+    font-weight: bold;
+}
+
+
+/* Histograma */
+
+.histograma-section {
+    text-align: center;
+}
+
+#canvasHistograma {
+    width: 100%;
+    max-width: 768px;
+    height: auto;
+    background-color: white;
+}
+
+.parametro .ajuda {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 18px !important;
+    height: 18px !important;
+
+    margin-left: 1px !important;
+    padding: 0 !important;
+
+    background-color: #777 !important;
+    color: white !important;
+
+    border-radius: 50% !important;
+
+    font-family: Arial, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    line-height: 18px !important;
+    text-align: center !important;
+
+    cursor: help !important;
+    box-sizing: border-box !important;
+    vertical-align: middle !important;
+}
+
+
+/* Responsividade */
+
+@media (max-width: 800px) {
+
+    main {
+        width: 98%;
+    }
+
+    .imagem-box {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .area-imagens {
+        flex-direction: column;
+    }
+
+    .dados-pixel {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .parametros {
+        flex-direction: column;
+    }
+}
